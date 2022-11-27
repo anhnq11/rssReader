@@ -30,10 +30,12 @@ public class MyAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Model> list;
+    private ArrayList<Integer> listImg = new ArrayList<>();
 
-    public MyAdapter (Context context, ArrayList<Model> list){
+    public MyAdapter (Context context, ArrayList<Model> list, ArrayList<Integer> listImg){
         this.context = context;
         this.list = list;
+        this.listImg = listImg;
     }
 
     @Override
@@ -57,11 +59,15 @@ public class MyAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
         }
+        int index = position;
         Model model = list.get(position);
         ImageView itemImg = convertView.findViewById(R.id.itemImg);
         TextView itemTitle = convertView.findViewById(R.id.itemTitle);
-//        Picasso.with(context).load(model.getImg()).into(itemImg);
         itemTitle.setText(model.getTitle());
+        if (position >= 10){
+            index = position - 10;
+        }
+        itemImg.setImageResource(listImg.get(index));
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,8 +83,14 @@ public class MyAdapter extends BaseAdapter {
                 Button btnMore = dialog.findViewById(R.id.btnMore);
                 Button btnClose = dialog.findViewById(R.id.btnClose);
 
+                int index = position;
+                if (position >= 10){
+                    index = position - 10;
+                }
+
                 dialogTittle.setText(model.getTitle());
                 dialogDes.setText(model.getDes());
+                dialogImg.setImageResource(listImg.get(index));
 
                 btnMore.setOnClickListener(new View.OnClickListener() {
                     @Override

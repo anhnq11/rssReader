@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     private ArrayList<Model> list;
     private MyAdapter adapter;
+    private ArrayList<Integer> listImg = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +42,19 @@ public class MainActivity extends AppCompatActivity {
         String url = intent.getStringExtra("listLink");
 
         new ReadRSS().execute(url);
-        adapter = new MyAdapter(this,  list);
+        adapter = new MyAdapter(this, list, listImg);
         listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-//                intent.putExtra("linkNews", list.get(i).getLink());
-//                startActivity(intent);
-//            }
-//        });
+
+        listImg.add(R.drawable.img1);
+        listImg.add(R.drawable.img2);
+        listImg.add(R.drawable.img3);
+        listImg.add(R.drawable.img4);
+        listImg.add(R.drawable.img5);
+        listImg.add(R.drawable.img6);
+        listImg.add(R.drawable.img7);
+        listImg.add(R.drawable.img8);
+        listImg.add(R.drawable.img9);
+        listImg.add(R.drawable.img10);
     }
 
     private class ReadRSS extends AsyncTask<String, Void, String> {

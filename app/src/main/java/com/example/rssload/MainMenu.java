@@ -15,7 +15,10 @@ public class MainMenu extends AppCompatActivity {
 
     private ArrayList<String> listTitle = new ArrayList<>();
     private ArrayList<String> listLink = new ArrayList<>();
+    private ArrayList<Integer> listImg = new ArrayList<>();
+    private ArrayList<Model2> list2 = new ArrayList<>();
     ListView listMainMenu;
+    private MyAdapter2 adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,16 +48,22 @@ public class MainMenu extends AppCompatActivity {
         listLink.add("https://www.realwire.com/rss/?id=769");
         listLink.add("https://www.realwire.com/rss/?id=505");
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listTitle);
-        listMainMenu.setAdapter(adapter);
+        listImg.add(R.drawable.img1);
+        listImg.add(R.drawable.img2);
+        listImg.add(R.drawable.img3);
+        listImg.add(R.drawable.img4);
+        listImg.add(R.drawable.img5);
+        listImg.add(R.drawable.img6);
+        listImg.add(R.drawable.img7);
+        listImg.add(R.drawable.img8);
+        listImg.add(R.drawable.img9);
+        listImg.add(R.drawable.img10);
 
-        listMainMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(MainMenu.this, MainActivity.class);
-                intent.putExtra("listLink", listLink.get(i));
-                startActivity(intent);
-            }
-        });
+        for (int i = 0; i < 10; i++) {
+            list2.add(new Model2(listTitle.get(i), listLink.get(i), listImg.get(i)));
+        }
+
+        adapter = new MyAdapter2(this, list2);
+        listMainMenu.setAdapter(adapter);
     }
 }
